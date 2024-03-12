@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Length Conversion Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="number"] {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        select {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Length Conversion Calculator</h1>
+        <div class="form-group">
+            <label for="fromValue">From:</label>
+            <input type="number" id="fromValue" placeholder="Enter value">
+            <select id="fromUnit">
+                <option value="mm">Millimeter (mm)</option>
+                <option value="cm">Centimeter (cm)</option>
+                <option value="m">Meter (m)</option>
+                <option value="in">Inch (in)</option>
+                <option value="ft">Foot (ft)</option>
+                <option value="km">Kilometer (km)</option>
+                <option value="yd">Yard (yd)</option>
+                <option value="mi">Mile (mi)</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="toUnit">To:</label>
+            <select id="toUnit">
+                <option value="mm">Millimeter (mm)</option>
+                <option value="cm">Centimeter (cm)</option>
+                <option value="m">Meter (m)</option>
+                <option value="in">Inch (in)</option>
+                <option value="ft">Foot (ft)</option>
+                <option value="km">Kilometer (km)</option>
+                <option value="yd">Yard (yd)</option>
+                <option value="mi">Mile (mi)</option>
+            </select>
+        </div>
+        <button onclick="convertLength()">Convert</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function convertLength() {
+            var fromValue = parseFloat(document.getElementById("fromValue").value);
+            var fromUnit = document.getElementById("fromUnit").value;
+            var toUnit = document.getElementById("toUnit").value;
+
+            var conversionFactors = {
+                "mm": {
+                    "mm": 1,
+                    "cm": 0.1,
+                    "m": 0.001,
+                    "in": 0.0393701,
+                    "ft": 0.00328084,
+                    "km": 0.000001,
+                    "yd": 0.00109361,
+                    "mi": 0.000000621371
+                },
+                "cm": {
+                    "mm": 10,
+                    "cm": 1,
+                    "m": 0.01,
+                    "in": 0.393701,
+                    "ft": 0.0328084,
+                    "km": 0.00001,
+                    "yd": 0.0109361,
+                    "mi": 0.00000621371
+                },
+                "m": {
+                    "mm": 1000,
+                    "cm": 100,
+                    "m": 1,
+                    "in": 39.3701,
+                    "ft": 3.28084,
+                    "km": 0.001,
+                    "yd": 1.09361,
+                    "mi": 0.000621371
+                },
+                "in": {
+                    "mm": 25.4,
+                    "cm": 2.54,
+                    "m": 0.0254,
+                    "in": 1,
+                    "ft": 0.0833333,
+                    "km": 0.0000254,
+                    "yd": 0.0277778,
+                    "mi": 0.000015783
+                },
+                "ft": {
+                    "mm": 304.8,
+                    "cm": 30.48,
+                    "m": 0.3048,
+                    "in": 12,
+                    "ft": 1,
+                    "km": 0.0003048,
+                    "yd": 0.333333,
+                    "mi": 0.000189394
+                },
+                "km": {
+                    "mm": 1000000,
+                    "cm": 100000,
+                    "m": 1000,
+                    "in": 39370.1,
+                    "ft": 3280.84,
+                    "km": 1,
+                    "yd": 1093.61,
+                    "mi": 0.621371
+                },
+                "yd": {
+                    "mm": 914.4,
+                    "cm": 91.44,
+                    "m": 0.9144,
+                    "in": 36,
+                    "ft": 3,
+                    "km": 0.0009144,
+                    "yd": 1,
+                    "mi": 0.000568182
+                },
+                "mi": {
+                    "mm": 1609344,
+                    "cm": 160934.4,
+                    "m": 1609.34,
+                    "in": 63360,
+                    "ft": 5280,
+                    "km": 1.60934,
+                    "yd": 1760,
+                    "mi": 1
+                }
+            };
+
+            var result = fromValue * conversionFactors[fromUnit][toUnit];
+
+            document.getElementById("result").textContent = "Result: " + result.toFixed(4) + " " + toUnit;
+        }
+    </script>
+</body>
+</html>
